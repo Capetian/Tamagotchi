@@ -1,7 +1,11 @@
-﻿  stdafx.cpp
-  Tamagotchi.cpp
+﻿  Tamagotchi.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Menu.cpp
+  Buttons.cpp
 sfml-graphics-s-d.lib(BlendMode.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(BlendMode.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-graphics-s-d.lib(Color.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(Color.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Font.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(Font.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-graphics-s-d.lib(GLCheck.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(GLCheck.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-graphics-s-d.lib(GLExtensions.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(GLExtensions.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-graphics-s-d.lib(Image.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(Image.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
@@ -17,8 +21,7 @@ sfml-graphics-s-d.lib(Transformable.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' 
 sfml-graphics-s-d.lib(View.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(View.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-graphics-s-d.lib(Vertex.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(Vertex.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-graphics-s-d.lib(GLLoader.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(GLLoader.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
-sfml-graphics-s-d.lib(Shape.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(Shape.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
-sfml-graphics-s-d.lib(CircleShape.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(CircleShape.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Text.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(Text.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-graphics-s-d.lib(VertexArray.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-graphics-s-d.lib(VertexArray.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-window-s-d.lib(Context.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-window-s-d.lib(Context.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
 sfml-window-s-d.lib(GlContext.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-window-s-d.lib(GlContext.cpp.obj)' or at 'c:\users\alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\vc140.pdb'; linking object as if no debug info
