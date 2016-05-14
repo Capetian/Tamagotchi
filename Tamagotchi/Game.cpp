@@ -7,7 +7,7 @@ Game::Game() {
 
 	text_play.setFont(font.style);
 	text_play.setString("PLAY");
-	text_play.setCharacterSize(20);
+	text_play.setCharacterSize(30);
 	text_play.setColor(sf::Color::White);
 	text_play.setPosition(320, 50);
 
@@ -16,70 +16,78 @@ Game::Game() {
 }
 
 Game::Game(bool loaded) {
+	tamagotchiCount = 0;
+	font_numb.style.loadFromFile("number.ttf");
 	t1 = sf::seconds(10);
 	t2 = sf::seconds(5);
 
 	text_play.setFont(font.style);
 	text_play.setString("1-PLAY");
-	text_play.setCharacterSize(20);
+	text_play.setCharacterSize(30);
 	text_play.setColor(sf::Color::White);
 	text_play.setPosition(20, 20);
 
 	text_feed.setFont(font.style);
 	text_feed.setString("2-FEED");
-	text_feed.setCharacterSize(20);
+	text_feed.setCharacterSize(30);
 	text_feed.setColor(sf::Color::White);
-	text_feed.setPosition(200, 20);
+	text_feed.setPosition(400, 20);
 
 	text_clean.setFont(font.style);
 	text_clean.setString("3-CLEAN");
-	text_clean.setCharacterSize(20);
+	text_clean.setCharacterSize(30);
 	text_clean.setColor(sf::Color::White);
-	text_clean.setPosition(380, 20);
+	text_clean.setPosition(20, 410);
+
+	text_heal.setFont(font.style);
+	text_heal.setString("4-HEAL");
+	text_heal.setCharacterSize(30);
+	text_heal.setColor(sf::Color::White);
+	text_heal.setPosition(400, 410);
 
 	title_health.setFont(font.style);
 	title_health.setString("HEALTH");
-	title_health.setCharacterSize(20);
+	title_health.setCharacterSize(30);
 	title_health.setColor(sf::Color::Green);
-	title_health.setPosition(700, 20);
+	title_health.setPosition(640, 20);
 
-	text_health.setFont(font.style);
-	text_health.setCharacterSize(20);
+	text_health.setFont(font_numb.style);
+	text_health.setCharacterSize(36);
 	text_health.setColor(sf::Color::Green);
-	text_health.setPosition(700, 40);
+	text_health.setPosition(690, 60);
 
 	title_energy.setFont(font.style);
 	title_energy.setString("ENERGY");
-	title_energy.setCharacterSize(20);
+	title_energy.setCharacterSize(30);
 	title_energy.setColor(sf::Color::Green);
-	title_energy.setPosition(700, 80);
+	title_energy.setPosition(640, 110);
 
-	text_energy.setFont(font.style);
-	text_energy.setCharacterSize(20);
+	text_energy.setFont(font_numb.style);
+	text_energy.setCharacterSize(36);
 	text_energy.setColor(sf::Color::Green);
-	text_energy.setPosition(700, 100);
+	text_energy.setPosition(690, 150);
 
 	title_happiness.setFont(font.style);
-	title_happiness.setString("Happiness");
-	title_happiness.setCharacterSize(20);
+	title_happiness.setString("HAPPY");
+	title_happiness.setCharacterSize(30);
 	title_happiness.setColor(sf::Color::Green);
-	title_happiness.setPosition(700, 140);
+	title_happiness.setPosition(640, 200);
 
-	text_happiness.setFont(font.style);
-	text_happiness.setCharacterSize(20);
+	text_happiness.setFont(font_numb.style);
+	text_happiness.setCharacterSize(36);
 	text_happiness.setColor(sf::Color::Green);
-	text_happiness.setPosition(700, 160);
+	text_happiness.setPosition(690, 240);
 
-	title_cleanless.setFont(font.style);
-	title_cleanless.setString("Cleanless");
-	title_cleanless.setCharacterSize(20);
-	title_cleanless.setColor(sf::Color::Green);
-	title_cleanless.setPosition(700, 200);
+	title_cleanliness.setFont(font.style);
+	title_cleanliness.setString("CLEAN");
+	title_cleanliness.setCharacterSize(30);
+	title_cleanliness.setColor(sf::Color::Green);
+	title_cleanliness.setPosition(640, 290);
 	
-	text_cleanless.setFont(font.style);
-	text_cleanless.setCharacterSize(20);
-	text_cleanless.setColor(sf::Color::Green);
-	text_cleanless.setPosition(700, 220);
+	text_cleanliness.setFont(font_numb.style);
+	text_cleanliness.setCharacterSize(36);
+	text_cleanliness.setColor(sf::Color::Green);
+	text_cleanliness.setPosition(690, 330);
 
 	sf::Vector2f size;
 	size.x = 580;
@@ -202,21 +210,22 @@ void Game::show_info(sf::RenderWindow &window)
 
 	text_health.setString(int2str(tamaHealth));
 	text_happiness.setString(int2str(tamaHappiness));
-	text_cleanless.setString(int2str(tamaCleanless));
+	text_cleanliness.setString(int2str(tamaCleanless));
 	text_energy.setString(int2str(tamaEnergy));
 
 	window.draw(title_health);
 	window.draw(title_happiness);
-	window.draw(title_cleanless);
+	window.draw(title_cleanliness);
 	window.draw(title_energy);
 	
 	window.draw(text_health);
 	window.draw(text_happiness);
-	window.draw(text_cleanless);
+	window.draw(text_cleanliness);
 	window.draw(text_energy);
 	window.draw(text_play);
 	window.draw(text_feed);
 	window.draw(text_clean);
+	window.draw(text_heal);
 	window.draw(rectangle_up);
 	window.draw(rectangle_down);
 	tamaVector[tamagotchiCount - 1]->setImage(window);

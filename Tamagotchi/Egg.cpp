@@ -20,7 +20,7 @@ void Egg::loseEnergy() {
 	energy -= 5;
 }
 void Egg::loseCleanless() {
-	cleanless -= 10;
+	cleanliness -= 10;
 }
 
 void Egg::getHungry() {
@@ -39,7 +39,7 @@ void Egg::feed() {
 }
 
 void Egg::clean() {
-	cleanless += 10;
+	cleanliness += 10;
 	happiness -= 2;
 	energy -= 2;
 }
@@ -68,7 +68,7 @@ int Egg::getHealth() {
 	return health;
 }
 int Egg::getCleanless() {
-	return cleanless;
+	return cleanliness;
 }
 
 

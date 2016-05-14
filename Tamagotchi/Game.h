@@ -17,18 +17,23 @@ private:
 	sf::Text text_play;
 	sf::Text text_feed;
 	sf::Text text_clean;
+	sf::Text text_heal;
+
 	sf::Text text_health;
-	sf::Text title_health;
-	sf::Text text_happiness;
-	sf::Text title_happiness;
-	sf::Text title_energy;
 	sf::Text text_energy;
-	sf::Text title_cleanless;
-	sf::Text text_cleanless;
+	sf::Text text_happiness;
+	sf::Text text_cleanliness;
+
+	sf::Text title_health;
+	sf::Text title_energy;
+	sf::Text title_happiness;
+	sf::Text title_cleanliness;
+
 	sf::RectangleShape rectangle_up;
 	sf::RectangleShape rectangle_down;
 	Font font;
-	int tamagotchiCount = 0;
+	Font font_numb;
+	int tamagotchiCount;
 	vector <Tamagotchi*> tamaVector;
 	//Tamagotchi *tamagotchi;
 };

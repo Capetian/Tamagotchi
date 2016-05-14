@@ -5,7 +5,7 @@
 	//setTamagotchiImage();
 	 happiness = 60;
 	 health = 60;
-	 cleanless = 60;
+	 cleanliness = 60;
 	 energy = 60;
 	 hunger = 60;
 	 clock.restart();

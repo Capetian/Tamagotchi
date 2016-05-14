@@ -27,7 +27,7 @@ public:
 protected:
 	int happiness;
 	int health;
-	int cleanless;
+	int cleanliness;
 	int energy;
 	int hunger;
 	void getLivingTime();
@@ -35,7 +35,7 @@ protected:
 private:	
 	
 
-	int birth;
+	float birth;
 	sf::Clock clock;
 };
 

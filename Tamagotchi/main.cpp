@@ -6,7 +6,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(900,500), "TAMAGOTCHI!");
+	sf::RenderWindow window(sf::VideoMode(900,460), "TAMAGOTCHI!");
 	window.setFramerateLimit(20);
 	Main_Menu menu;
 	while (window.isOpen())

@@ -1,3 +1,4 @@
 ﻿  Tamagotchi.cpp
-c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\tamagotchi.cpp(20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   Tamagotchi.vcxproj -> C:\Users\Alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\Tamagotchi.exe
