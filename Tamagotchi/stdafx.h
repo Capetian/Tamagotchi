@@ -6,9 +6,19 @@
 #pragma once
 
 #include "targetver.h"
-
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include "Interface.h"
 #include <stdio.h>
+#include <iostream>
 #include <tchar.h>
+#include "Tamagotchi.h"
+#include "Egg.h"
+#include <vector>
+#include <deque>
+#include "Menu.h"
+#include <SFML/System/Time.hpp>
+#include "Files.h"
 
 
 

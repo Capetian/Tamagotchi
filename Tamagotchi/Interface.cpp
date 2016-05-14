@@ -1,7 +1,16 @@
 #include "stdafx.h"
 #include "Interface.h"
-#include <iostream>
 
+
+
+string int2str(int i)
+{
+	stringstream ss;
+	string temp;
+	ss << i;
+	ss >> temp;
+	return temp;
+}
 
 Font::Font()
 {

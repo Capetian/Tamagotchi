@@ -1,9 +1,10 @@
 #ifndef MENU_H_
 #define MENU_H_
+#include "stdafx.h"
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "stdafx.h"
 #include "Buttons.h"
+#include "Game.h"
 
 class Main_Menu
 {
@@ -21,6 +22,8 @@ public:
 	//metoda przyjmujaca wybrana pozycje w menu i zwracajaca wynik wybranej funkcji
 	int selected_position(int p, sf::RenderWindow &window);
 };
+
+void startNewGame(sf::RenderWindow &window);
 /*
 class Pause : public Main_Menu
 {
@@ -36,4 +39,13 @@ public:
 //funkcja obslugujaca wybranie przycisku zaladowanej gry
 //void start_loaded_game(sf::RenderWindow &window);
 */
+
+class Pause : public Main_Menu
+{
+public:
+	Pause();
+	int pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi);
+	int selected_position(int p, sf::RenderWindow &window, Tamagotchi *tamagotchi);
+
+};
 #endif

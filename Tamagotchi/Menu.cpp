@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Menu.h"
 
+
 Main_Menu::Main_Menu()
 {
 
@@ -29,7 +30,8 @@ Main_Menu::Main_Menu(string name)
 
 Main_Menu::~Main_Menu()
 {
-	for (int i = 0; i < 5; i++) {
+
+	for (int i = 0; i < button.size(); i++) {
 		delete button[i];
 	}
 	p_b = NULL;
@@ -41,6 +43,7 @@ int Main_Menu::selected_position(int p, sf::RenderWindow &window)
 	switch (p)
 	{
 	case 0:
+		startNewGame(window);
 		//start_new_game(window);
 		break;
 	case 1:
@@ -119,6 +122,74 @@ int Main_Menu::main_menu(sf::RenderWindow &window)
 	}
 
 	return 0;
+}
+
+void startNewGame(sf::RenderWindow &window) {
+
+	Game game(false);
+	if (game.play(window) == 0)
+	{
+		window.clear();
+		sf::Time time;
+		sf::Time t1 = sf::seconds(3);
+		sf::Clock clock;
+		sf::Text text;
+		Font font;
+		text.setFont(font.style);
+		text.setString("Game Over");
+		text.setCharacterSize(30);
+		text.setColor(sf::Color::Green);
+		text.setPosition(150, 150);
+
+		while (window.isOpen())
+		{
+			time = clock.getElapsedTime();
+			if (time>t1)
+			{
+				return;
+			}
+			window.draw(text);
+			window.display();
+			window.clear();
+
+		}
+	}
+	else
+	{
+		window.clear();
+		sf::Time time;
+		sf::Time t1 = sf::seconds(3);
+		sf::Clock clock;
+		sf::Text text;
+		sf::Text text1;
+		Font font;
+		text.setFont(font.style);
+		text.setString("Game Over");
+		text.setCharacterSize(30);
+		text.setColor(sf::Color::Green);
+		text.setPosition(150, 150);
+
+		text1.setFont(font.style);
+		text1.setString("Top score!");
+		text1.setCharacterSize(30);
+		text1.setColor(sf::Color::White);
+		text1.setPosition(140, 200);
+
+		while (window.isOpen())
+		{
+			time = clock.getElapsedTime();
+			if (time>t1)
+			{
+				return;
+			}
+			window.draw(text);
+			window.draw(text1);
+			window.display();
+			window.clear();
+
+		}
+	}
+	return;
 }
 /*
 Pause::Pause() : Main_Menu("Pause")
@@ -342,3 +413,90 @@ void start_loaded_game(sf::RenderWindow &window)
 	return;
 }
 */
+
+Pause::Pause() : Main_Menu("Pause")
+{
+	button.push_back(new Button(160, 100, 0, font, "Back"));
+	button.push_back(new Button(160, 170, 1, font, "Save & close"));
+	button.push_back(new Button(160, 240, 2, font, "Close"));
+
+}
+
+
+
+int Pause::pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi)
+{
+	p_b = button[0];
+	p_b->buttonSelected();
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+				return 0;
+			}
+
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Return)
+				{
+					if (selected_position(p_b->getMenuPosition(), window, tamagotchi) == 1)
+					{
+						return 1;
+					}
+					else
+					{
+						return 0;
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::Down)
+				{
+					if (p_b->getMenuPosition()<2)
+					{
+						p_b->buttonUnselected();
+						p_b = button[p_b->getMenuPosition() + 1];
+						p_b->buttonSelected();
+					}
+				}
+				if (event.key.code == sf::Keyboard::Up)
+				{
+
+					if (p_b->getMenuPosition()>0)
+					{
+						p_b->buttonUnselected();
+						p_b = button[p_b->getMenuPosition() - 1];
+						p_b->buttonSelected();
+					}
+				}
+			}
+		}
+		for (int i = 0; i<3; i++)
+			button[i]->draw(window);
+		window.draw(text);
+		window.display();
+		window.clear();
+	}
+	return 0;
+}
+
+int Pause::selected_position(int p, sf::RenderWindow &window, Tamagotchi *tamagotchi)
+{
+	switch (p)
+	{
+	case 0:
+		return 1;
+		break;
+	case 1:
+	    save_game(tamagotchi);
+		return 0;
+		break;
+	case 2:
+		return 0;
+		break;
+	}
+	return 0;
+}
