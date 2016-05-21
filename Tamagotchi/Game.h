@@ -36,5 +36,7 @@ private:
 	int tamagotchiCount;
 	vector <Tamagotchi*> tamaVector;
 	//Tamagotchi *tamagotchi;
+	void setUpBackground(sf::RenderWindow &window);
+	sf::Sprite background;
 };
 #endif

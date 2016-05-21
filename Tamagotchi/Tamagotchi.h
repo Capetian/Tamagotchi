@@ -7,6 +7,7 @@
 class Tamagotchi {
 public:
 	Tamagotchi();
+	Tamagotchi(int happiness, int health, int cleanliness, int energy, int hunger);
 	virtual void setImage(sf::RenderWindow &window) = 0;
 	virtual void startSleeping(sf::RenderWindow &window) = 0;
 	virtual int getHealth() = 0;

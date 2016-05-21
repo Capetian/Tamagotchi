@@ -11,6 +11,7 @@ int main()
 	Main_Menu menu;
 	while (window.isOpen())
 	{
+
 		if (menu.main_menu(window) == 0)
 			window.close();
 	}

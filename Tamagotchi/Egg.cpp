@@ -51,8 +51,9 @@ void Egg::cure() {
 void Egg::setImage(sf::RenderWindow &window) {
 	sf::Texture texture;
 	try {
-		texture.loadFromFile("coco1.png");
+		texture.loadFromFile("egg1.png");
 		icon.setTexture(texture);
+		icon.setPosition(100, 200);
 	}
 	catch (exception e) {
 		cout << "Error loading texture!" << endl;

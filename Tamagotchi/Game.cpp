@@ -108,8 +108,24 @@ Game::Game(bool loaded) {
 	Tamagotchi *tamagotchi = new Egg("Ala");
 	tamaVector.push_back(tamagotchi);
 	tamagotchiCount++;
+
+
 	
 }
+
+void Game::setUpBackground(sf::RenderWindow &window) {
+	sf::Texture texture;
+	try {
+		texture.loadFromFile("background.jpg");
+		background.setTexture(texture);
+	}
+	catch (exception e) {
+		cout << "Error loading texture!" << endl;
+	}
+
+	window.draw(background);
+}
+
 
 int Game::play(sf::RenderWindow &window) {
 	while (window.isOpen())
@@ -169,7 +185,10 @@ int Game::play(sf::RenderWindow &window) {
 		//jezeli zmierzony czas jest wiekszy od zmiennej t1 (2 sek) generowany jest nowy wrog
 		if (time>t1)
 		{
-			tamaVector[tamagotchiCount - 1]->loseHealth();
+			//tamaVector[tamagotchiCount - 1]->loseHealth();
+			Tamagotchi *tamagotchi = new Chicken(tamaVector[tamagotchiCount - 1]);
+			tamaVector.push_back(tamagotchi);
+			tamagotchiCount++;
 			clock.restart();
 		}
 
@@ -226,7 +245,11 @@ void Game::show_info(sf::RenderWindow &window)
 	window.draw(text_feed);
 	window.draw(text_clean);
 	window.draw(text_heal);
+
+	//setUpBackground(window);
+
 	window.draw(rectangle_up);
 	window.draw(rectangle_down);
+
 	tamaVector[tamagotchiCount - 1]->setImage(window);
 }

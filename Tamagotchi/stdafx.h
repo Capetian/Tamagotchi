@@ -14,6 +14,7 @@
 #include <tchar.h>
 #include "Tamagotchi.h"
 #include "Egg.h"
+#include "Chicken.h"
 #include <vector>
 #include <deque>
 #include "Menu.h"

@@ -11,6 +11,9 @@
 	 clock.restart();
 }
 
+ Tamagotchi::Tamagotchi(int happiness, int health, int cleanliness, int energy, int hunger)
+ :happiness(happiness), health(health), cleanliness(cleanliness), energy(energy), hunger(hunger){}
+
  int Tamagotchi::getEnergy() {
 	 return energy;
  }
