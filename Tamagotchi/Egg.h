@@ -2,12 +2,12 @@
 #define EGG_H_
 #include "stdafx.h"
 
-class Egg: public Tamagotchi{
+class Egg: public Tamagotchi, public GameObject{
 public:
 	Egg();
 	Egg(string name);
 	void startSleeping(sf::RenderWindow &window);
-	void setImage(sf::RenderWindow &window);
+	void setImage();
 	void loseHealth();
 	 void loseHappiness();
 	 void loseEnergy();
@@ -20,9 +20,13 @@ public:
 	void feed();
 	void clean();
 	void cure();
-private:
-
+	void move(float _x);
+	void draw(sf::RenderWindow &window);
+	sf::Sprite icon;
+protected:
+    sf::Texture texture;
 	string name;
+
 
 };
 

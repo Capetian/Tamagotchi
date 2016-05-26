@@ -2,15 +2,20 @@
 #include "Chicken.h"
 
 Chicken::Chicken() {
-
+	
 }
 
-Chicken::Chicken(Tamagotchi *tamagotchi) {
-	health = tamagotchi->getHealth();
-	happiness = tamagotchi->getHappiness();
-	cleanliness = tamagotchi->getCleanless();
-	energy = tamagotchi->getEnergy();
+Chicken::Chicken(Egg egg) {
+	health = egg.getHealth();
+	happiness = egg.getHappiness();
+	cleanliness = egg.getCleanless();
+	energy = egg.getEnergy();
+	x = egg.returnx();
+	y = egg.returny();
 	//hunger = egg->getHungry();
+	setImage();
+
+	
 
 }
 void Chicken::loseHealth() {
@@ -52,8 +57,8 @@ void Chicken::cure() {
 	health += 10;
 	happiness += 2;
 }
-void Chicken::setImage(sf::RenderWindow &window) {
-	sf::Texture texture;
+void Chicken::setImage() {
+	//sf::Texture texture;
 	try {
 		texture.loadFromFile("coco1.png");
 		icon.setTexture(texture);
@@ -62,10 +67,16 @@ void Chicken::setImage(sf::RenderWindow &window) {
 		cout << "Error loading texture!" << endl;
 	}
 
-	icon.setPosition(100, 200);
-	window.draw(icon);
+	icon.setPosition(returnx(), returny());
+
 
 }
+
+void Chicken::draw(sf::RenderWindow &window)
+{
+	window.draw(icon);
+}
+
 int Chicken::getHappiness() {
 	return happiness;
 }
@@ -88,4 +99,13 @@ void Chicken::startSleeping(sf::RenderWindow &window) {
 	icon.setTexture(texture);
 	window.draw(icon);
 
+}
+
+void Chicken::move(float _x)
+{
+	cout << "moving" << endl;
+	icon.move(_x, 0);
+	sf::Vector2f position = icon.getPosition();
+	x = position.x;
+	//y=position.y;
 }

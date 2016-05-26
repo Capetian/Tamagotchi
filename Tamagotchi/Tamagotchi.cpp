@@ -34,4 +34,6 @@
 	 out << tamagotchi->energy << endl;
 	 return out;
  }
+ 
+
 

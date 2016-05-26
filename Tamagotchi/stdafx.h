@@ -13,6 +13,7 @@
 #include <iostream>
 #include <tchar.h>
 #include "Tamagotchi.h"
+#include "GameObject.h"
 #include "Egg.h"
 #include "Chicken.h"
 #include <vector>
@@ -20,6 +21,7 @@
 #include "Menu.h"
 #include <SFML/System/Time.hpp>
 #include "Files.h"
+
 
 
 

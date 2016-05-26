@@ -1,12 +1,13 @@
 #include "stdafx.h"
 #include "Egg.h"
 
-Egg::Egg() {
-
+Egg::Egg():GameObject(100,200) {
+	setImage();
 }
 
-Egg::Egg(string eggName) {
+Egg::Egg(string eggName) : GameObject(100, 200) {
 	name = eggName;
+	setImage();
 }
 
 void Egg::loseHealth() {
@@ -48,8 +49,8 @@ void Egg::cure() {
 	health += 10;
 	happiness += 2;
 }
-void Egg::setImage(sf::RenderWindow &window) {
-	sf::Texture texture;
+void Egg::setImage() {
+	
 	try {
 		texture.loadFromFile("egg1.png");
 		icon.setTexture(texture);
@@ -58,10 +59,13 @@ void Egg::setImage(sf::RenderWindow &window) {
 	catch (exception e) {
 		cout << "Error loading texture!" << endl;
 	}
-
-	window.draw(icon);
-	
 }
+
+void Egg::draw(sf::RenderWindow &window)
+{
+	window.draw(icon);
+}
+
 int Egg::getHappiness() {
 	return happiness;
 }
@@ -84,4 +88,12 @@ void Egg::startSleeping(sf::RenderWindow &window) {
 	icon.setTexture(texture);
 	window.draw(icon);
 
+}
+
+void Egg::move(float _x) {
+	cout << "moving" << endl;
+	icon.move(_x, 0);
+	sf::Vector2f position = icon.getPosition();
+	x = position.x;
+	//y=position.y;}
 }

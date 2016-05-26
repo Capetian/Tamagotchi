@@ -128,6 +128,7 @@ void Game::setUpBackground(sf::RenderWindow &window) {
 
 
 int Game::play(sf::RenderWindow &window) {
+	Tamagotchi *tamagotchi;
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -174,22 +175,65 @@ int Game::play(sf::RenderWindow &window) {
 		//poruszanie sie graczem za pomoca strzalek
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-		
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-		
+			tamagotchi = tamaVector[tamagotchiCount - 1];
+			try {
+				Egg &egg = dynamic_cast<Egg &>(*tamagotchi);
+				cout << egg.returnx();
+				if (egg.returnx() > 0)
+					egg.move(-14);
+			}
+			catch (bad_cast&) {
+				try {
+					Chicken &chicken = dynamic_cast<Chicken &>(*tamagotchi);
+					if (chicken.returnx() > 0)
+						chicken.move(-14);
+				}
+				catch (bad_cast&) {
+					cout << "Bad cast" << endl;
+				}
+			}
+
 		}
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			tamagotchi = tamaVector[tamagotchiCount - 1];
+			try {
+				Egg &egg = dynamic_cast<Egg &>(*tamagotchi);
+				if (egg.returnx() <500)
+					egg.move(14);
+			}
+			catch (bad_cast&) {
+				try {
+					Chicken &chicken = dynamic_cast<Chicken &>(*tamagotchi);
+					if (chicken.returnx() < 500)
+						chicken.move(14);
+				}
+				catch (bad_cast&) {
+					cout << "Bad cast" << endl;
+				}
+			}
+
+		}
+		
 		time = clock.getElapsedTime();
 		//jezeli zmierzony czas jest wiekszy od zmiennej t1 (2 sek) generowany jest nowy wrog
-		if (time>t1)
+		if (time > t1)
 		{
-			//tamaVector[tamagotchiCount - 1]->loseHealth();
-			Tamagotchi *tamagotchi = new Chicken(tamaVector[tamagotchiCount - 1]);
+			Tamagotchi *tamagotchi;
+		
+			if (typeid(Egg) == typeid(*tamaVector[tamagotchiCount - 1])) {
+				Egg &egg = dynamic_cast<Egg &>(*tamaVector[tamagotchiCount - 1]);
+			tamagotchi = new Chicken(egg);
 			tamaVector.push_back(tamagotchi);
 			tamagotchiCount++;
 			clock.restart();
+			}
+			else {
+				//if (typeid(Chicken) == typeid(*tamaVector[tamagotchiCount - 1])) 
+				//tamagotchi = new Chicken(tamaVector[tamagotchiCount - 1]);
+			}
+			
 		}
 
 		time = clock_PU.getElapsedTime();
@@ -251,5 +295,5 @@ void Game::show_info(sf::RenderWindow &window)
 	window.draw(rectangle_up);
 	window.draw(rectangle_down);
 
-	tamaVector[tamagotchiCount - 1]->setImage(window);
+	tamaVector[tamagotchiCount - 1]->draw(window);
 }

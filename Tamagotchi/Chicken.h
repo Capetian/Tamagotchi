@@ -2,12 +2,12 @@
 #define CHICKEN_H_
 #include "stdafx.h"
 
-class Chicken: public Tamagotchi {
+class Chicken: public Egg {
 public:
 	Chicken();
-	Chicken(Tamagotchi *tamagotchi);
+	Chicken(Egg egg);
 	void startSleeping(sf::RenderWindow &window);
-	void setImage(sf::RenderWindow &window);
+	void setImage();
 	void loseHealth();
 	void loseHappiness();
 	void loseEnergy();
@@ -20,6 +20,10 @@ public:
 	void feed();
 	void clean();
 	void cure();
+	void move(float _x);
+	void draw(sf::RenderWindow &window);
+//private:
+//	static sf::Texture texture;
 
 };
 
