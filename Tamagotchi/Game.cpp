@@ -1,10 +1,17 @@
 #include "stdafx.h"
 #include "Game.h"
 
+Game::~Game() {
+	for (int i = 0; i < tamaVector.size(); i++) {
+		delete tamaVector[i];
+	}
+	for (int i = 0; i < balls.size(); i++) {
+		delete balls[i];
+	}
+}
 Game::Game() {
 	t1 = sf::seconds(5);
 	t2 = sf::seconds(5);
-
 	text_play.setFont(font.style);
 	text_play.setString("PLAY");
 	text_play.setCharacterSize(30);
@@ -19,7 +26,7 @@ Game::Game(bool loaded) {
 	tamagotchiCount = 0;
 	font_numb.style.loadFromFile("number.ttf");
 	t1 = sf::seconds(10);
-	t2 = sf::seconds(5);
+	t2 = sf::seconds(3);
 
 	text_play.setFont(font.style);
 	text_play.setString("1-PLAY");
@@ -149,7 +156,8 @@ int Game::play(sf::RenderWindow &window) {
 				}
 			//nacisnieto 1 - bawimy sie
 			if (event.key.code == sf::Keyboard::Num1) {
-				tamaVector[tamagotchiCount-1]->play();
+				//tamaVector[tamagotchiCount-1]->play();
+				
 			}
 
 			if (event.key.code == sf::Keyboard::Num2) {
@@ -241,11 +249,38 @@ int Game::play(sf::RenderWindow &window) {
 		if (time>t2)
 		{
 			
+				Ball *tmp = new Ball(125,0);
+				balls.push_back(tmp);
+				clock_PU.restart();
 		}
 
 		//obsluga rysowania i ruchu wrogow
 	
-
+		for (int i = 0; i<balls.size(); i++)
+		{
+			if (balls[i]->returny()<300)
+			{
+				//jezeli wrog miesci sie na polu gry, porusza sie w dol i jest rysowany na ekranie
+				balls[i]->move();
+				balls[i]->draw(window);
+			}
+			//else
+			//{
+			//	//jezeli nie miesci sie, graczowi odejmowana jest liczba punktow jaka zostala niezabitemu wrogowi w polu Damage
+			////	player -= enemies[i]->returnDamage();
+			//	//wrog jest usuwany z wektora i z pamieci
+			//	tamaVector[tamagotchiCount - 1]->feed();
+			//	delete balls[i];
+			//	balls.erase(balls.begin() + i, balls.begin() + i + 1);
+			//}
+			Egg *egg = (dynamic_cast<Egg*>(tamaVector[tamagotchiCount - 1]));
+			if (balls[i]->returny() +20 > egg->returny() && balls[i]->returny() < egg->returny()
+				&& (balls[i]->returnx() < egg->returnx()+100) && balls[i]->returnx() > egg->returnx()) {
+					tamaVector[tamagotchiCount - 1]->feed();
+					delete balls[i];
+					balls.erase(balls.begin() + i, balls.begin() + i + 1);
+			}
+		}
 		
 
 	

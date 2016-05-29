@@ -1,8 +1,10 @@
 
 #include "stdafx.h"
+#include "vld.h"
 #include "Menu.h"
-
+#include <conio.h>
 #include <SFML/Graphics.hpp>
+
 
 int main()
 {
@@ -16,6 +18,6 @@ int main()
 			window.close();
 	}
 
-
+	_getch();
 	return 0;
 }

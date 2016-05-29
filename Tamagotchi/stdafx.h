@@ -12,8 +12,9 @@
 #include <stdio.h>
 #include <iostream>
 #include <tchar.h>
-#include "Tamagotchi.h"
 #include "GameObject.h"
+#include "Ball.h"
+#include "Tamagotchi.h"
 #include "Egg.h"
 #include "Chicken.h"
 #include <vector>

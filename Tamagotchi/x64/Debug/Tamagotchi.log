@@ -1,15 +1,2 @@
-﻿  stdafx.cpp
-  Game.cpp
-  Chicken.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
-  Tamagotchi.cpp
-  Menu.cpp
-  Interface.cpp
-  GameObject.cpp
-  Files.cpp
-  Egg.cpp
-  Buttons.cpp
-  AboutGame.cpp
+﻿  Game.cpp
   Tamagotchi.vcxproj -> C:\Users\Alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\Tamagotchi.exe

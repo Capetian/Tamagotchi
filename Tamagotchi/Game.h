@@ -6,6 +6,7 @@ class Game {
 public:
 	Game();
 	Game(bool loaded);
+	~Game();
 	int play(sf::RenderWindow &window);
 	void show_info(sf::RenderWindow &window);
 	sf::Time time;
@@ -34,6 +35,8 @@ private:
 	Font font;
 	Font font_numb;
 	int tamagotchiCount;
+	bool isPlaying = false;
+	vector <Ball*> balls;
 	vector <Tamagotchi*> tamaVector;
 	//Tamagotchi *tamagotchi;
 	void setUpBackground(sf::RenderWindow &window);
