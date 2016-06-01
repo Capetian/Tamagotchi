@@ -23,6 +23,8 @@ public:
 	virtual void feed() = 0;
 	virtual void clean() = 0;
 	virtual void cure() = 0;
+	virtual void addExperience() = 0;
+	virtual int getExperience() = 0;
 	//virtual void move(float _x) = 0;
 
 	friend ostream& operator<<(ostream &out,Tamagotchi *tamagotchi);

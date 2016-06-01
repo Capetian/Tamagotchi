@@ -5,12 +5,12 @@ Game::~Game() {
 	for (int i = 0; i < tamaVector.size(); i++) {
 		delete tamaVector[i];
 	}
-	for (int i = 0; i < balls.size(); i++) {
-		delete balls[i];
+	for (int i = 0; i < fruits.size(); i++) {
+		delete fruits[i];
 	}
 }
 Game::Game() {
-	t1 = sf::seconds(5);
+	t1 = sf::seconds(25);
 	t2 = sf::seconds(5);
 	text_play.setFont(font.style);
 	text_play.setString("PLAY");
@@ -25,8 +25,9 @@ Game::Game() {
 Game::Game(bool loaded) {
 	tamagotchiCount = 0;
 	font_numb.style.loadFromFile("number.ttf");
-	t1 = sf::seconds(10);
+	t1 = sf::seconds(20);
 	t2 = sf::seconds(3);
+	t3 = sf::seconds(1);
 
 	text_play.setFont(font.style);
 	text_play.setString("1-PLAY");
@@ -90,7 +91,7 @@ Game::Game(bool loaded) {
 	title_cleanliness.setCharacterSize(30);
 	title_cleanliness.setColor(sf::Color::Green);
 	title_cleanliness.setPosition(640, 290);
-	
+
 	text_cleanliness.setFont(font_numb.style);
 	text_cleanliness.setCharacterSize(36);
 	text_cleanliness.setColor(sf::Color::Green);
@@ -117,7 +118,7 @@ Game::Game(bool loaded) {
 	tamagotchiCount++;
 
 
-	
+
 }
 
 void Game::setUpBackground(sf::RenderWindow &window) {
@@ -139,29 +140,30 @@ int Game::play(sf::RenderWindow &window) {
 	while (window.isOpen())
 	{
 		sf::Event event;
- 		while (window.pollEvent(event))
+		while (window.pollEvent(event))
 		{
 			//jezeli zamknieto okno
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-			if (event.type == sf::Event::KeyPressed)
-				//jezeli nacisnieta zostala spacja, generowana jest nowa kula
-				if (event.key.code == sf::Keyboard::Space)
-				{
-					sf::CircleShape shape(50);
-					shape.setFillColor(sf::Color::Blue);
-					window.draw(shape);
-				
-				}
+			//if (event.type == sf::Event::KeyPressed)
+			//	//jezeli nacisnieta zostala spacja, generowana jest nowa kula
+			//	if (event.key.code == sf::Keyboard::Space){
+			//		sf::CircleShape shape(50);
+			//		shape.setFillColor(sf::Color::Blue);
+			//		window.draw(shape);
+
+			//	}
 			//nacisnieto 1 - bawimy sie
 			if (event.key.code == sf::Keyboard::Num1) {
-				//tamaVector[tamagotchiCount-1]->play();
-				
+				if (!isPlaying) 
+					isPlaying = true;
+
 			}
 
 			if (event.key.code == sf::Keyboard::Num2) {
-				tamaVector[tamagotchiCount - 1]->feed();
+				//tamaVector[tamagotchiCount - 1]->feed();
+				if (!isEating) isEating = true;
 			}
 
 			if (event.key.code == sf::Keyboard::Num3) {
@@ -175,14 +177,13 @@ int Game::play(sf::RenderWindow &window) {
 			if (event.key.code == sf::Keyboard::Escape)
 			{
 				Pause pause;
-				if (pause.pause_menu(window, tamaVector[tamagotchiCount-1]) == 0)
+				if (pause.pause_menu(window, tamaVector[tamagotchiCount - 1]) == 0)
 					window.close();
 			}
 		}
 
 		//poruszanie sie graczem za pomoca strzalek
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 			tamagotchi = tamaVector[tamagotchiCount - 1];
 			try {
 				Egg &egg = dynamic_cast<Egg &>(*tamagotchi);
@@ -203,12 +204,11 @@ int Game::play(sf::RenderWindow &window) {
 
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 			tamagotchi = tamaVector[tamagotchiCount - 1];
 			try {
 				Egg &egg = dynamic_cast<Egg &>(*tamagotchi);
-				if (egg.returnx() <500)
+				if (egg.returnx() < 500)
 					egg.move(14);
 			}
 			catch (bad_cast&) {
@@ -223,72 +223,85 @@ int Game::play(sf::RenderWindow &window) {
 			}
 
 		}
-		
+
 		time = clock.getElapsedTime();
-		//jezeli zmierzony czas jest wiekszy od zmiennej t1 (2 sek) generowany jest nowy wrog
-		if (time > t1)
-		{
+
+		if (time > t1 && (tamaVector[tamagotchiCount - 1]->getExperience() > 20)
+			&& tamaVector[tamagotchiCount - 1]->getEnergy() > 50) {
 			Tamagotchi *tamagotchi;
-		
+
 			if (typeid(Egg) == typeid(*tamaVector[tamagotchiCount - 1])) {
 				Egg &egg = dynamic_cast<Egg &>(*tamaVector[tamagotchiCount - 1]);
-			tamagotchi = new Chicken(egg);
-			tamaVector.push_back(tamagotchi);
-			tamagotchiCount++;
-			clock.restart();
+				tamagotchi = new Chicken(egg);
+				tamaVector.push_back(tamagotchi);
+				tamagotchiCount++;
+				clock.restart();
 			}
 			else {
 				//if (typeid(Chicken) == typeid(*tamaVector[tamagotchiCount - 1])) 
 				//tamagotchi = new Chicken(tamaVector[tamagotchiCount - 1]);
 			}
-			
+
 		}
 
 		time = clock_PU.getElapsedTime();
 		//jezeli zmierzony czas jest wiekszy od zmiennej t1 (5 sek) generowany jest nowy bonus
-		if (time>t2)
-		{
-			
-				Ball *tmp = new Ball(125,0);
-				balls.push_back(tmp);
-				clock_PU.restart();
+		if (time > t2 && isEating) {
+			int x = rand() % 300;
+			Fruit *tmp = new Fruit(x, 0);
+			fruits.push_back(tmp);
+			clock_PU.restart();
+			fruitCounter++;
+			if (fruitCounter > 5) {
+				isEating = false;
+				fruitCounter = 0;
+			}
+		}
+		else if (time > t3 && isPlaying) {
+			int x = rand() % 300;
+			Ball *tmp = new Ball(x, 0);
+			balls.push_back(tmp);
+			clock_PU.restart();
+			ballsCounter++;
+			if (ballsCounter > 15) {
+				isPlaying = false;
+				ballsCounter = 0;
+			}
 		}
 
-		//obsluga rysowania i ruchu wrogow
-	
-		for (int i = 0; i<balls.size(); i++)
-		{
-			if (balls[i]->returny()<300)
-			{
-				//jezeli wrog miesci sie na polu gry, porusza sie w dol i jest rysowany na ekranie
-				balls[i]->move();
+		if ((tamaVector[tamagotchiCount - 1])->getHungry() < 10 && (tamaVector[tamagotchiCount - 1])->getEnergy() < 10)
+			return 0;
+
+		for (int i = 0; i < fruits.size(); i++) {
+			if (fruits[i]->returny() < 300) {
+				fruits[i]->move(14);
+				fruits[i]->draw(window);
+			}
+
+			Egg *egg = (dynamic_cast<Egg*>(tamaVector[tamagotchiCount - 1]));
+			if (fruits[i]->returny() + 20 > egg->returny() && fruits[i]->returny() < egg->returny()
+				&& (fruits[i]->returnx() < egg->returnx() + 100) && fruits[i]->returnx() > egg->returnx()) {
+				tamaVector[tamagotchiCount - 1]->feed();
+				delete fruits[i];
+				fruits.erase(fruits.begin() + i, fruits.begin() + i + 1);
+			}
+		}
+
+		for (int i = 0; i < balls.size(); i++) {
+			if (balls[i]->returny() < 300) {
+				balls[i]->move(24);
 				balls[i]->draw(window);
 			}
-			//else
-			//{
-			//	//jezeli nie miesci sie, graczowi odejmowana jest liczba punktow jaka zostala niezabitemu wrogowi w polu Damage
-			////	player -= enemies[i]->returnDamage();
-			//	//wrog jest usuwany z wektora i z pamieci
-			//	tamaVector[tamagotchiCount - 1]->feed();
-			//	delete balls[i];
-			//	balls.erase(balls.begin() + i, balls.begin() + i + 1);
-			//}
+
 			Egg *egg = (dynamic_cast<Egg*>(tamaVector[tamagotchiCount - 1]));
-			if (balls[i]->returny() +20 > egg->returny() && balls[i]->returny() < egg->returny()
-				&& (balls[i]->returnx() < egg->returnx()+100) && balls[i]->returnx() > egg->returnx()) {
-					tamaVector[tamagotchiCount - 1]->feed();
-					delete balls[i];
-					balls.erase(balls.begin() + i, balls.begin() + i + 1);
+			if (balls[i]->returny() + 20 > egg->returny() && balls[i]->returny() < egg->returny()
+				&& (balls[i]->returnx() < egg->returnx() + 100) && balls[i]->returnx() > egg->returnx()) {
+				tamaVector[tamagotchiCount - 1]->play();
+				delete balls[i];
+				balls.erase(balls.begin() + i, balls.begin() + i + 1);
 			}
 		}
-		
 
-	
-
-	
-
-
-		//przejscie do funkcji wyswietlajacej na ekranie pole do gry, wynik, poziom
 		show_info(window);
 		window.display();
 		window.clear();
@@ -299,7 +312,6 @@ int Game::play(sf::RenderWindow &window) {
 
 void Game::show_info(sf::RenderWindow &window)
 {
-
 
 	int tamaHealth = tamaVector[tamagotchiCount - 1]->getHealth();
 	int tamaHappiness = tamaVector[tamagotchiCount - 1]->getHappiness();
@@ -315,7 +327,7 @@ void Game::show_info(sf::RenderWindow &window)
 	window.draw(title_happiness);
 	window.draw(title_cleanliness);
 	window.draw(title_energy);
-	
+
 	window.draw(text_health);
 	window.draw(text_happiness);
 	window.draw(text_cleanliness);
@@ -324,8 +336,6 @@ void Game::show_info(sf::RenderWindow &window)
 	window.draw(text_feed);
 	window.draw(text_clean);
 	window.draw(text_heal);
-
-	//setUpBackground(window);
 
 	window.draw(rectangle_up);
 	window.draw(rectangle_down);

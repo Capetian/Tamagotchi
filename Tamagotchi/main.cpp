@@ -17,7 +17,7 @@ int main()
 		if (menu.main_menu(window) == 0)
 			window.close();
 	}
-
+	
 	_getch();
 	return 0;
 }

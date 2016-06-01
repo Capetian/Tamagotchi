@@ -72,6 +72,10 @@ void Chicken::setImage() {
 
 }
 
+void Chicken::addExperience() {
+	experience += 3;
+}
+
 void Chicken::draw(sf::RenderWindow &window)
 {
 	window.draw(icon);

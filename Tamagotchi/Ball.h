@@ -2,7 +2,7 @@
 #define BALL_H_
 #include "stdafx.h"
 
-class Ball : public GameObject{
+class Ball : public GameObject {
 private:
 	sf::Sprite icon;
 	sf::Texture texture;
@@ -14,7 +14,7 @@ public:
 	void draw(sf::RenderWindow &window);
 
 	//wirtualna metoda zmieniajaca polozenie wroga
-	 void move();
+	void move(int speed);
 };
 
 #endif

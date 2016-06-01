@@ -3,6 +3,7 @@
 
 Egg::Egg():GameObject(100,200) {
 	setImage();
+	experience = 0;
 }
 
 Egg::Egg(string eggName) : GameObject(100, 200) {
@@ -30,12 +31,14 @@ void Egg::getHungry() {
 void Egg::play() {
 	happiness += 10;
 	energy -= 5;
+	addExperience();
 }
 
 void Egg::feed() {
 	if (hunger > 0) {
 		energy += 2;
 		hunger -= 10;
+		addExperience();
 	}   //TODO: add overfeeding?
 }
 
@@ -76,6 +79,13 @@ int Egg::getCleanless() {
 	return cleanliness;
 }
 
+int Egg::getExperience() {
+	return experience;
+}
+
+void Egg::addExperience() {
+	experience += 5;
+}
 
 void Egg::startSleeping(sf::RenderWindow &window) {
 	sf::Texture texture;

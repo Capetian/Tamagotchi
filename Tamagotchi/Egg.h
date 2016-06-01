@@ -23,9 +23,12 @@ public:
 	void move(float _x);
 	void draw(sf::RenderWindow &window);
 	sf::Sprite icon;
+	void addExperience();
+	int getExperience();
 protected:
     sf::Texture texture;
 	string name;
+	int experience;
 
 
 };

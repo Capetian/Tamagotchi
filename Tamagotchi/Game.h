@@ -12,6 +12,7 @@ public:
 	sf::Time time;
 	sf::Time t1;
 	sf::Time t2;
+	sf::Time t3;
 	sf::Clock clock;
 	sf::Clock clock_PU;
 private:
@@ -36,6 +37,10 @@ private:
 	Font font_numb;
 	int tamagotchiCount;
 	bool isPlaying = false;
+	bool isEating = false;
+	int fruitCounter = 0;
+	int ballsCounter = 0;
+	vector <Fruit*> fruits;
 	vector <Ball*> balls;
 	vector <Tamagotchi*> tamaVector;
 	//Tamagotchi *tamagotchi;

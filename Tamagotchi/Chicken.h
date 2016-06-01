@@ -22,6 +22,7 @@ public:
 	void cure();
 	void move(float _x);
 	void draw(sf::RenderWindow &window);
+	void addExperience();
 //private:
 //	static sf::Texture texture;
 

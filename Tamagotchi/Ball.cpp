@@ -1,9 +1,13 @@
 #include "stdafx.h"
 #include "Ball.h"
 
-Ball::Ball(float _x, float _y) : GameObject(_x, _y){
+Ball::Ball(float _x, float _y) : GameObject(_x, _y) {
+
 	try {
-		texture.loadFromFile("strawberry30.png");
+	
+	texture.loadFromFile("basketball.png");
+	
+
 		icon.setTexture(texture);
 		icon.setPosition(_x, _y);
 	}
@@ -12,9 +16,9 @@ Ball::Ball(float _x, float _y) : GameObject(_x, _y){
 	}
 }
 
-void Ball::move()
+void Ball::move(int speed)
 {
-	icon.move(0, 14);
+	icon.move(0, speed);
 	sf::Vector2f position = icon.getPosition();
 	y = position.y;
 }

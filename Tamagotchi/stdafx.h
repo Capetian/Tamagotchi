@@ -13,6 +13,7 @@
 #include <iostream>
 #include <tchar.h>
 #include "GameObject.h"
+#include "Fruit.h"
 #include "Ball.h"
 #include "Tamagotchi.h"
 #include "Egg.h"
