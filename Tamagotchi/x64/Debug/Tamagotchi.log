@@ -1,4 +1,4 @@
 ﻿  Game.cpp
-c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(251): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(262): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(272): error C2120: 'void' illegal with all types
+c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(236): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(247): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Tamagotchi.vcxproj -> C:\Users\Alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\Tamagotchi.exe

@@ -2,21 +2,14 @@
 #include "Tamagotchi.h"
 
  Tamagotchi::Tamagotchi() {
-	//setTamagotchiImage();
-	 happiness = 60;
-	 health = 60;
-	 cleanliness = 60;
-	 energy = 60;
-	 hunger = 60;
+	 happiness = 20;
+	 hunger = 50;
+	 experience = 0;
 	 clock.restart();
 }
+ Tamagotchi::Tamagotchi(int happiness, int hunger, int experience)
+	 :happiness(happiness), hunger(hunger), experience(experience){}
 
- Tamagotchi::Tamagotchi(int happiness, int health, int cleanliness, int energy, int hunger)
- :happiness(happiness), health(health), cleanliness(cleanliness), energy(energy), hunger(hunger){}
-
- int Tamagotchi::getEnergy() {
-	 return energy;
- }
 
  void Tamagotchi::getLivingTime() {
 	 sf::Time time = clock.getElapsedTime();
@@ -26,14 +19,42 @@
 
  ostream& operator<<(ostream &out, Tamagotchi *tamagotchi){
 	 tamagotchi->getLivingTime();
-	 
-	 out << tamagotchi->birth << endl;
+	 out << "1" << endl;
+	/* out << tamagotchi->birth << endl;*/
 	 out << tamagotchi->happiness << endl;
-	 out << tamagotchi->health << endl;
+	 out << tamagotchi->experience << endl;
 	 out << tamagotchi->hunger << endl;
-	 out << tamagotchi->energy << endl;
+
 	 return out;
  }
- 
+
+ istream& operator>>(istream &in, Tamagotchi &tamagotchi) {
+	 int tempType;
+	 Chicken temp = Chicken();
+	 if (in >> tempType) {
+		 switch (tempType) {
+		 case 0:
+			 temp =Egg();
+			 break;
+		 case 1:
+			 temp =Chicken();
+			 break;
+		 default:
+			 temp = Egg();
+			 break;
+		 }
+		 if (in >> temp.happiness) {
+			 if (in >> temp.experience) {
+				 if (in >> temp.hunger) {
+					 tamagotchi = temp;
+					 return in;
+				 }
+			 }
+		 }
+	 }
+	 in.clear();
+	 throw UnloadedGame();
+	 return in;
+ }
 
 

@@ -23,7 +23,8 @@ public:
 	int selected_position(int p, sf::RenderWindow &window);
 };
 
-void startNewGame(sf::RenderWindow &window);
+void startGame(sf::RenderWindow &window, bool loaded);
+
 /*
 class Pause : public Main_Menu
 {
@@ -44,6 +45,7 @@ class Pause : public Main_Menu
 {
 public:
 	Pause();
+	~Pause();
 	int pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi);
 	int selected_position(int p, sf::RenderWindow &window, Tamagotchi *tamagotchi);
 

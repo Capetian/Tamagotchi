@@ -8,19 +8,12 @@ Game::~Game() {
 	for (int i = 0; i < fruits.size(); i++) {
 		delete fruits[i];
 	}
-}
-Game::Game() {
-	t1 = sf::seconds(25);
-	t2 = sf::seconds(5);
-	text_play.setFont(font.style);
-	text_play.setString("PLAY");
-	text_play.setCharacterSize(30);
-	text_play.setColor(sf::Color::White);
-	text_play.setPosition(320, 50);
-
-
+	for (int i = 0; i < balls.size(); i++) {
+		delete balls[i];
+	}
 
 }
+
 
 Game::Game(bool loaded) {
 	tamagotchiCount = 0;
@@ -41,39 +34,28 @@ Game::Game(bool loaded) {
 	text_feed.setColor(sf::Color::White);
 	text_feed.setPosition(400, 20);
 
-	text_clean.setFont(font.style);
-	text_clean.setString("3-CLEAN");
-	text_clean.setCharacterSize(30);
-	text_clean.setColor(sf::Color::White);
-	text_clean.setPosition(20, 410);
 
-	text_heal.setFont(font.style);
-	text_heal.setString("4-HEAL");
-	text_heal.setCharacterSize(30);
-	text_heal.setColor(sf::Color::White);
-	text_heal.setPosition(400, 410);
+	title_hunger.setFont(font.style);
+	title_hunger.setString("HUNGER");
+	title_hunger.setCharacterSize(30);
+	title_hunger.setColor(sf::Color::Green);
+	title_hunger.setPosition(640, 20);
 
-	title_health.setFont(font.style);
-	title_health.setString("HEALTH");
-	title_health.setCharacterSize(30);
-	title_health.setColor(sf::Color::Green);
-	title_health.setPosition(640, 20);
+	text_hunger.setFont(font_numb.style);
+	text_hunger.setCharacterSize(36);
+	text_hunger.setColor(sf::Color::Green);
+	text_hunger.setPosition(690, 60);
 
-	text_health.setFont(font_numb.style);
-	text_health.setCharacterSize(36);
-	text_health.setColor(sf::Color::Green);
-	text_health.setPosition(690, 60);
+	title_experience.setFont(font.style);
+	title_experience.setString("EXP");
+	title_experience.setCharacterSize(30);
+	title_experience.setColor(sf::Color::Green);
+	title_experience.setPosition(640, 110);
 
-	title_energy.setFont(font.style);
-	title_energy.setString("ENERGY");
-	title_energy.setCharacterSize(30);
-	title_energy.setColor(sf::Color::Green);
-	title_energy.setPosition(640, 110);
-
-	text_energy.setFont(font_numb.style);
-	text_energy.setCharacterSize(36);
-	text_energy.setColor(sf::Color::Green);
-	text_energy.setPosition(690, 150);
+	text_experience.setFont(font_numb.style);
+	text_experience.setCharacterSize(36);
+	text_experience.setColor(sf::Color::Green);
+	text_experience.setPosition(690, 150);
 
 	title_happiness.setFont(font.style);
 	title_happiness.setString("HAPPY");
@@ -86,16 +68,7 @@ Game::Game(bool loaded) {
 	text_happiness.setColor(sf::Color::Green);
 	text_happiness.setPosition(690, 240);
 
-	title_cleanliness.setFont(font.style);
-	title_cleanliness.setString("CLEAN");
-	title_cleanliness.setCharacterSize(30);
-	title_cleanliness.setColor(sf::Color::Green);
-	title_cleanliness.setPosition(640, 290);
 
-	text_cleanliness.setFont(font_numb.style);
-	text_cleanliness.setCharacterSize(36);
-	text_cleanliness.setColor(sf::Color::Green);
-	text_cleanliness.setPosition(690, 330);
 
 	sf::Vector2f size;
 	size.x = 580;
@@ -107,31 +80,35 @@ Game::Game(bool loaded) {
 	rectangle_up.setPosition(10, 10);
 	rectangle_up.setSize(size);
 
-	rectangle_down.setFillColor(sf::Color::Transparent);
-	rectangle_down.setOutlineColor(sf::Color::White);
-	rectangle_down.setOutlineThickness(1);
-	rectangle_down.setPosition(10, 400);
-	rectangle_down.setSize(size);
 
-	Tamagotchi *tamagotchi = new Egg("Ala");
+	Tamagotchi *tamagotchi;
+	tamagotchi = new Egg();
+
+	if (loaded) {
+		AbstractObject object = getTamagotchiFromFile();
+		switch (object.type) {
+		case 0:
+			tamagotchi = new Egg(object);
+			break;
+		case 1:
+			tamagotchi = new Chicken(object);
+			break;
+		case 2:
+			tamagotchi = new Dragon(object);
+			break;
+		default:
+			tamagotchi = new Egg();
+			break;
+		}
+	}
+	else {
+
+	}
 	tamaVector.push_back(tamagotchi);
 	tamagotchiCount++;
 
 
 
-}
-
-void Game::setUpBackground(sf::RenderWindow &window) {
-	sf::Texture texture;
-	try {
-		texture.loadFromFile("background.jpg");
-		background.setTexture(texture);
-	}
-	catch (exception e) {
-		cout << "Error loading texture!" << endl;
-	}
-
-	window.draw(background);
 }
 
 
@@ -146,31 +123,16 @@ int Game::play(sf::RenderWindow &window) {
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-			//if (event.type == sf::Event::KeyPressed)
-			//	//jezeli nacisnieta zostala spacja, generowana jest nowa kula
-			//	if (event.key.code == sf::Keyboard::Space){
-			//		sf::CircleShape shape(50);
-			//		shape.setFillColor(sf::Color::Blue);
-			//		window.draw(shape);
 
-			//	}
 			//nacisnieto 1 - bawimy sie
 			if (event.key.code == sf::Keyboard::Num1) {
-				if (!isPlaying) 
+				if (!isPlaying)
 					isPlaying = true;
-
 			}
 
 			if (event.key.code == sf::Keyboard::Num2) {
-				//tamaVector[tamagotchiCount - 1]->feed();
-				if (!isEating) isEating = true;
-			}
-
-			if (event.key.code == sf::Keyboard::Num3) {
-				tamaVector[tamagotchiCount - 1]->clean();
-			}
-			if (event.key.code == sf::Keyboard::Num4) {
-				tamaVector[tamagotchiCount - 1]->cure();
+				if (!isEating)
+					isEating = true;
 			}
 
 			//jezeli nacisniety zostal klawisz escape, przechodzimy do trybu pauzy
@@ -182,12 +144,11 @@ int Game::play(sf::RenderWindow &window) {
 			}
 		}
 
-		//poruszanie sie graczem za pomoca strzalek
+		//poruszanie sie tamagotchi za pomoca strzalek
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 			tamagotchi = tamaVector[tamagotchiCount - 1];
 			try {
 				Egg &egg = dynamic_cast<Egg &>(*tamagotchi);
-				cout << egg.returnx();
 				if (egg.returnx() > 0)
 					egg.move(-14);
 			}
@@ -198,7 +159,14 @@ int Game::play(sf::RenderWindow &window) {
 						chicken.move(-14);
 				}
 				catch (bad_cast&) {
-					cout << "Bad cast" << endl;
+					try {
+						Dragon &dragon = dynamic_cast<Dragon &>(*tamagotchi);
+						if (dragon.returnx() > 0)
+							dragon.move(-14);
+					}
+					catch (bad_cast&) {
+						cout << "Bad cast" << endl;
+					}
 				}
 			}
 
@@ -218,16 +186,23 @@ int Game::play(sf::RenderWindow &window) {
 						chicken.move(14);
 				}
 				catch (bad_cast&) {
-					cout << "Bad cast" << endl;
+					try {
+						Dragon &dragon = dynamic_cast<Dragon &>(*tamagotchi);
+						if (dragon.returnx() < 500)
+							dragon.move(14);
+					}
+					catch (bad_cast&) {
+						cout << "Bad cast" << endl;
+					}
+
 				}
 			}
 
 		}
 
-		time = clock.getElapsedTime();
+		time = clockTransformation.getElapsedTime();
 
-		if (time > t1 && (tamaVector[tamagotchiCount - 1]->getExperience() > 20)
-			&& tamaVector[tamagotchiCount - 1]->getEnergy() > 50) {
+		if (time > t1 && !isPlaying && !isEating && tamaVector[tamagotchiCount - 1]->getExperience() > 20) {
 			Tamagotchi *tamagotchi;
 
 			if (typeid(Egg) == typeid(*tamaVector[tamagotchiCount - 1])) {
@@ -235,22 +210,32 @@ int Game::play(sf::RenderWindow &window) {
 				tamagotchi = new Chicken(egg);
 				tamaVector.push_back(tamagotchi);
 				tamagotchiCount++;
-				clock.restart();
+				clockTransformation.restart();
 			}
-			else {
-				//if (typeid(Chicken) == typeid(*tamaVector[tamagotchiCount - 1])) 
-				//tamagotchi = new Chicken(tamaVector[tamagotchiCount - 1]);
+			else if (typeid(Chicken) == typeid(*tamaVector[tamagotchiCount - 1])) {
+				Chicken &chicken = dynamic_cast<Chicken &>(*tamaVector[tamagotchiCount - 1]);
+				tamagotchi = new Dragon(chicken);
+				tamaVector.push_back(tamagotchi);
+				tamagotchiCount++;
+				clockTransformation.restart();
+
 			}
 
 		}
 
-		time = clock_PU.getElapsedTime();
-		//jezeli zmierzony czas jest wiekszy od zmiennej t1 (5 sek) generowany jest nowy bonus
+		time = clockGrowingUp.getElapsedTime();
+
+		if (time > t2 && !isPlaying && !isEating) {
+			tamaVector[tamagotchiCount - 1]->loseHappiness();
+			tamaVector[tamagotchiCount - 1]->getHungry();
+			clockGrowingUp.restart();
+		}
+
 		if (time > t2 && isEating) {
 			int x = rand() % 300;
 			Fruit *tmp = new Fruit(x, 0);
 			fruits.push_back(tmp);
-			clock_PU.restart();
+			clockObjectGenerator.restart();
 			fruitCounter++;
 			if (fruitCounter > 5) {
 				isEating = false;
@@ -261,7 +246,7 @@ int Game::play(sf::RenderWindow &window) {
 			int x = rand() % 300;
 			Ball *tmp = new Ball(x, 0);
 			balls.push_back(tmp);
-			clock_PU.restart();
+			clockObjectGenerator.restart();
 			ballsCounter++;
 			if (ballsCounter > 15) {
 				isPlaying = false;
@@ -269,7 +254,7 @@ int Game::play(sf::RenderWindow &window) {
 			}
 		}
 
-		if ((tamaVector[tamagotchiCount - 1])->getHungry() < 10 && (tamaVector[tamagotchiCount - 1])->getEnergy() < 10)
+		if ((tamaVector[tamagotchiCount - 1]->getHunger() < 10) && (tamaVector[tamagotchiCount - 1]->getHappiness() < 10))
 			return 0;
 
 		for (int i = 0; i < fruits.size(); i++) {
@@ -313,32 +298,29 @@ int Game::play(sf::RenderWindow &window) {
 void Game::show_info(sf::RenderWindow &window)
 {
 
-	int tamaHealth = tamaVector[tamagotchiCount - 1]->getHealth();
+	int tamaHunger = tamaVector[tamagotchiCount - 1]->getHunger();
 	int tamaHappiness = tamaVector[tamagotchiCount - 1]->getHappiness();
-	int tamaCleanless = tamaVector[tamagotchiCount - 1]->getCleanless();
-	int tamaEnergy = tamaVector[tamagotchiCount - 1]->getEnergy();
+	int tamaExperience = tamaVector[tamagotchiCount - 1]->getExperience();
 
-	text_health.setString(int2str(tamaHealth));
 	text_happiness.setString(int2str(tamaHappiness));
-	text_cleanliness.setString(int2str(tamaCleanless));
-	text_energy.setString(int2str(tamaEnergy));
+	text_hunger.setString(int2str(tamaHunger));
+	text_experience.setString(int2str(tamaExperience));
 
-	window.draw(title_health);
+
+
 	window.draw(title_happiness);
-	window.draw(title_cleanliness);
-	window.draw(title_energy);
+	window.draw(title_hunger);
+	window.draw(title_experience);
 
-	window.draw(text_health);
 	window.draw(text_happiness);
-	window.draw(text_cleanliness);
-	window.draw(text_energy);
+	window.draw(text_hunger);
+	window.draw(text_experience);
 	window.draw(text_play);
 	window.draw(text_feed);
-	window.draw(text_clean);
-	window.draw(text_heal);
+
 
 	window.draw(rectangle_up);
-	window.draw(rectangle_down);
+
 
 	tamaVector[tamagotchiCount - 1]->draw(window);
 }

@@ -5,30 +5,25 @@
 class Egg: public Tamagotchi, public GameObject{
 public:
 	Egg();
-	Egg(string name);
-	void startSleeping(sf::RenderWindow &window);
+	Egg(AbstractObject object);
 	void setImage();
-	void loseHealth();
 	 void loseHappiness();
-	 void loseEnergy();
-	 void loseCleanless();
 	 void getHungry();
 	int getHappiness();
-	int getHealth();
-	int getCleanless();
+	int getHunger();
+	int getExperience();
 	void play();
 	void feed();
-	void clean();
-	void cure();
+
 	void move(float _x);
 	void draw(sf::RenderWindow &window);
 	sf::Sprite icon;
 	void addExperience();
-	int getExperience();
+
 protected:
     sf::Texture texture;
 	string name;
-	int experience;
+
 
 
 };

@@ -35,6 +35,7 @@ using std::vector;
 //funkcja zapisujaca do pliku aktualny stan rozgrywki
 //przyjmuje referencje do obiektu Player
 void save_game(Tamagotchi *tamagotchi);
+AbstractObject getTamagotchiFromFile();
 
 ////funkcja wczytujaca z pliku uprzednio zapisany stan rozgrywki
 ////zwraca obiekt Player - gracza z uzupelnionymi polami o poziomie, wyniku i predkosci

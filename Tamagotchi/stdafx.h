@@ -12,12 +12,15 @@
 #include <stdio.h>
 #include <iostream>
 #include <tchar.h>
+#include "AbstractObject.h"
+#include "MyException.h"
 #include "GameObject.h"
 #include "Fruit.h"
 #include "Ball.h"
 #include "Tamagotchi.h"
 #include "Egg.h"
 #include "Chicken.h"
+#include "Dragon.h"
 #include <vector>
 #include <deque>
 #include "Menu.h"
