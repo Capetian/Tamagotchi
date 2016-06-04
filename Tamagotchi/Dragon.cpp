@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Dragon.h"
 
-Dragon::Dragon(AbstractObject object) {
+Dragon::Dragon(GameState object) {
 	hunger = object.hunger;
 	happiness = object.happiness;
 	experience = object.experience;
@@ -30,15 +30,18 @@ void Dragon::getHungry() {
 	hunger += 30;
 }
 void Dragon::play() {
-	happiness += 3;
+	if (happiness < 100)
+		happiness += 3;
+	addExperience();
+
 
 }
 
 void Dragon::feed() {
-	if (hunger > 2) {
+	if (hunger > 2)
 		hunger -= 2;
-		addExperience();
-	}
+	addExperience();
+
 }
 
 

@@ -16,6 +16,7 @@ public:
 	virtual void feed() = 0;
 	virtual void loseHappiness() = 0;
 	virtual void getHungry() = 0;
+	
 
 	//virtual int getCleanless() = 0;
 	//int getEnergy();

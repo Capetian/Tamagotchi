@@ -20,7 +20,12 @@ Game::Game(bool loaded) {
 	font_numb.style.loadFromFile("number.ttf");
 	t1 = sf::seconds(20);
 	t2 = sf::seconds(3);
-	t3 = sf::seconds(1);
+	t3 = sf::seconds(10);
+
+	timeBetweenTransformations = sf::seconds(60);
+	timeToGrowUp = sf::seconds(10);
+	timeBetweenBalls = sf::seconds(0.3);
+	timeBetweenFood = sf::seconds(2);
 
 	text_play.setFont(font.style);
 	text_play.setString("1-PLAY");
@@ -74,18 +79,21 @@ Game::Game(bool loaded) {
 	size.x = 580;
 	size.y = 50;
 
+	sf::Vector2f size_line;
+	size_line.x = 580;
+	size_line.y = 1;
+
+	bottom_line.setPosition(0, 370);
+	bottom_line.setSize(size_line);
+
 	rectangle_up.setFillColor(sf::Color::Transparent);
 	rectangle_up.setOutlineColor(sf::Color::White);
 	rectangle_up.setOutlineThickness(1);
 	rectangle_up.setPosition(10, 10);
 	rectangle_up.setSize(size);
 
-
-	Tamagotchi *tamagotchi;
-	tamagotchi = new Egg();
-
 	if (loaded) {
-		AbstractObject object = getTamagotchiFromFile();
+		GameState object = getTamagotchiFromFile();
 		switch (object.type) {
 		case 0:
 			tamagotchi = new Egg(object);
@@ -100,13 +108,16 @@ Game::Game(bool loaded) {
 			tamagotchi = new Egg();
 			break;
 		}
+		addedTime = sf::seconds(object.time);
 	}
 	else {
 
+		tamagotchi = new Egg();
+		addedTime = sf::seconds(0);
 	}
+
 	tamaVector.push_back(tamagotchi);
 	tamagotchiCount++;
-
 
 
 }
@@ -126,12 +137,12 @@ int Game::play(sf::RenderWindow &window) {
 
 			//nacisnieto 1 - bawimy sie
 			if (event.key.code == sf::Keyboard::Num1) {
-				if (!isPlaying)
+				if (!isPlaying && !isEating)
 					isPlaying = true;
 			}
 
 			if (event.key.code == sf::Keyboard::Num2) {
-				if (!isEating)
+				if (!isEating && !isPlaying)
 					isEating = true;
 			}
 
@@ -139,7 +150,7 @@ int Game::play(sf::RenderWindow &window) {
 			if (event.key.code == sf::Keyboard::Escape)
 			{
 				Pause pause;
-				if (pause.pause_menu(window, tamaVector[tamagotchiCount - 1]) == 0)
+				if (pause.pause_menu(window, tamaVector[tamagotchiCount - 1], clockTransformation.getElapsedTime()) == 0)
 					window.close();
 			}
 		}
@@ -169,7 +180,6 @@ int Game::play(sf::RenderWindow &window) {
 					}
 				}
 			}
-
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -202,70 +212,68 @@ int Game::play(sf::RenderWindow &window) {
 
 		time = clockTransformation.getElapsedTime();
 
-		if (time > t1 && !isPlaying && !isEating && tamaVector[tamagotchiCount - 1]->getExperience() > 20) {
+		if (time + addedTime > timeBetweenTransformations && !isPlaying && !isEating && tamaVector[tamagotchiCount - 1]->getExperience() > 20) {
 			Tamagotchi *tamagotchi;
-
+			addedTime = sf::seconds(0);
 			if (typeid(Egg) == typeid(*tamaVector[tamagotchiCount - 1])) {
 				Egg &egg = dynamic_cast<Egg &>(*tamaVector[tamagotchiCount - 1]);
 				tamagotchi = new Chicken(egg);
-				tamaVector.push_back(tamagotchi);
-				tamagotchiCount++;
-				clockTransformation.restart();
 			}
 			else if (typeid(Chicken) == typeid(*tamaVector[tamagotchiCount - 1])) {
 				Chicken &chicken = dynamic_cast<Chicken &>(*tamaVector[tamagotchiCount - 1]);
 				tamagotchi = new Dragon(chicken);
-				tamaVector.push_back(tamagotchi);
-				tamagotchiCount++;
-				clockTransformation.restart();
 
 			}
-
+			tamaVector.push_back(tamagotchi);
+			tamagotchiCount++;
+			clockTransformation.restart();
+			timeBetweenTransformations = sf::seconds(1.5 * timeBetweenTransformations.asSeconds());
 		}
 
 		time = clockGrowingUp.getElapsedTime();
 
-		if (time > t2 && !isPlaying && !isEating) {
+		if (time > timeToGrowUp && !isPlaying && !isEating) {
 			tamaVector[tamagotchiCount - 1]->loseHappiness();
 			tamaVector[tamagotchiCount - 1]->getHungry();
 			clockGrowingUp.restart();
 		}
 
-		if (time > t2 && isEating) {
-			int x = rand() % 300;
+		if (time > timeBetweenFood && isEating &&!isPlaying) {
+			int x = rand() % 500;
 			Fruit *tmp = new Fruit(x, 0);
 			fruits.push_back(tmp);
 			clockObjectGenerator.restart();
 			fruitCounter++;
-			if (fruitCounter > 5) {
+			if (fruitCounter > 15) {
 				isEating = false;
 				fruitCounter = 0;
 			}
 		}
-		else if (time > t3 && isPlaying) {
-			int x = rand() % 300;
+		time = clockObjectGenerator.getElapsedTime();
+		if (time > timeBetweenBalls && isPlaying && !isEating) {
+			int x = rand() % 500;
 			Ball *tmp = new Ball(x, 0);
 			balls.push_back(tmp);
 			clockObjectGenerator.restart();
 			ballsCounter++;
-			if (ballsCounter > 15) {
+			if (ballsCounter > 20) {
 				isPlaying = false;
 				ballsCounter = 0;
 			}
 		}
 
-		if ((tamaVector[tamagotchiCount - 1]->getHunger() < 10) && (tamaVector[tamagotchiCount - 1]->getHappiness() < 10))
+		if ((tamaVector[tamagotchiCount - 1]->getHunger() < 10) && (tamaVector[tamagotchiCount - 1]->getHappiness() <= 0))
 			return 0;
 
 		for (int i = 0; i < fruits.size(); i++) {
-			if (fruits[i]->returny() < 300) {
+			if (fruits[i]->returny() < 330) {
 				fruits[i]->move(14);
 				fruits[i]->draw(window);
 			}
 
-			Egg *egg = (dynamic_cast<Egg*>(tamaVector[tamagotchiCount - 1]));
-			if (fruits[i]->returny() + 20 > egg->returny() && fruits[i]->returny() < egg->returny()
-				&& (fruits[i]->returnx() < egg->returnx() + 100) && fruits[i]->returnx() > egg->returnx()) {
+			GameObject *object = (dynamic_cast<GameObject*>(tamaVector[tamagotchiCount - 1]));
+			if (fruits[i]->returny() + 20 > object->returny() && fruits[i]->returny() < object->returny()
+				&& (fruits[i]->returnx() < object->returnx() + 100) && fruits[i]->returnx() > object->returnx()) {
 				tamaVector[tamagotchiCount - 1]->feed();
 				delete fruits[i];
 				fruits.erase(fruits.begin() + i, fruits.begin() + i + 1);
@@ -273,14 +281,14 @@ int Game::play(sf::RenderWindow &window) {
 		}
 
 		for (int i = 0; i < balls.size(); i++) {
-			if (balls[i]->returny() < 300) {
+			if (balls[i]->returny() < 330) {
 				balls[i]->move(24);
 				balls[i]->draw(window);
 			}
-
-			Egg *egg = (dynamic_cast<Egg*>(tamaVector[tamagotchiCount - 1]));
-			if (balls[i]->returny() + 20 > egg->returny() && balls[i]->returny() < egg->returny()
-				&& (balls[i]->returnx() < egg->returnx() + 100) && balls[i]->returnx() > egg->returnx()) {
+			
+			GameObject *object = (dynamic_cast<GameObject*>(tamaVector[tamagotchiCount - 1]));
+			if (balls[i]->returny() + 20 > object->returny() && balls[i]->returny() < object->returny()
+				&& (balls[i]->returnx() < object->returnx() + 100) && balls[i]->returnx() > object->returnx()) {
 				tamaVector[tamagotchiCount - 1]->play();
 				delete balls[i];
 				balls.erase(balls.begin() + i, balls.begin() + i + 1);
@@ -320,6 +328,7 @@ void Game::show_info(sf::RenderWindow &window)
 
 
 	window.draw(rectangle_up);
+	window.draw(bottom_line);
 
 
 	tamaVector[tamagotchiCount - 1]->draw(window);

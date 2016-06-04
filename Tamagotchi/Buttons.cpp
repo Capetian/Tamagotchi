@@ -14,6 +14,7 @@ Button::Button(float _x, float _y, int p, Font &font, string name)
 	text.setString(name);
 }
 
+
 //pozostale metody
 
 void Button::draw(sf::RenderWindow &window)

@@ -5,7 +5,7 @@
 class Chicken: public Egg {
 public:
 	Chicken();
-	Chicken(AbstractObject object);
+	Chicken(GameState object);
 	Chicken(Egg egg);
 	
 	void setImage();

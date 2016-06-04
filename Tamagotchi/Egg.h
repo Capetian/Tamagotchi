@@ -5,7 +5,7 @@
 class Egg: public Tamagotchi, public GameObject{
 public:
 	Egg();
-	Egg(AbstractObject object);
+	Egg(GameState object);
 	void setImage();
 	 void loseHappiness();
 	 void getHungry();
@@ -22,7 +22,6 @@ public:
 
 protected:
     sf::Texture texture;
-	string name;
 
 
 

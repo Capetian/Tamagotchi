@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Chicken.h"
 
-Chicken::Chicken(AbstractObject object) {
+Chicken::Chicken(GameState object) {
 	hunger = object.hunger;
 	happiness = object.happiness;
 	experience = object.experience;
@@ -30,16 +30,17 @@ void Chicken::getHungry() {
 	hunger += 20;
 }
 void Chicken::play() {
-	happiness += 5;
+	if (happiness < 100)
+		happiness += 5;
 	addExperience();
 
 }
 
 void Chicken::feed() {
-	if (hunger > 5) {
+	if (hunger > 5)
 		hunger -= 3;
-		addExperience();
-	}
+	addExperience();
+
 }
 
 

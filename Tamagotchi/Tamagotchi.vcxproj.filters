@@ -63,10 +63,10 @@
     <ClInclude Include="MyException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractObject.h">
+    <ClInclude Include="Dragon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dragon.h">
+    <ClInclude Include="GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -116,11 +116,11 @@
     <ClCompile Include="MyException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Dragon.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

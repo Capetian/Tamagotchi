@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Egg.h"
 
-Egg::Egg():GameObject() {
+Egg::Egg() :GameObject() {
 	setImage();
 }
 
 
-Egg::Egg(AbstractObject object){
+Egg::Egg(GameState object) {
 	hunger = object.hunger;
 	happiness = object.happiness;
 	experience = object.experience;
@@ -20,20 +20,21 @@ void Egg::getHungry() {
 	hunger += 10;
 }
 void Egg::play() {
-	happiness += 10;
+	if (happiness < 100)
+		happiness += 10;
 	addExperience();
 }
 
 void Egg::feed() {
 	if (hunger > 3) {
 		hunger -= 5;
-		addExperience();
 	}
+	addExperience();
 }
 
 
 void Egg::setImage() {
-	
+
 	try {
 		texture.loadFromFile("egg1.png");
 		icon.setTexture(texture);

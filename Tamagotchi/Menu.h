@@ -46,8 +46,8 @@ class Pause : public Main_Menu
 public:
 	Pause();
 	~Pause();
-	int pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi);
-	int selected_position(int p, sf::RenderWindow &window, Tamagotchi *tamagotchi);
+	int pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi, sf::Time time);
+	int selected_position(int p, sf::RenderWindow &window, Tamagotchi *tamagotchi, sf::Time time);
 
 };
 #endif

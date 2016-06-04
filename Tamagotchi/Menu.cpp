@@ -12,7 +12,6 @@ Main_Menu::Main_Menu()
 	text.setColor(sf::Color::Blue);
 	button.push_back(new Button(160, 100, 0, font, "New game"));
 	button.push_back(new Button(160, 170, 1, font, "Load game"));
-	button.push_back(new Button(160, 310, 3, font, "Info?"));
 	button.push_back(new Button(160, 380, 4, font, "Close"));
 
 }
@@ -44,15 +43,11 @@ int Main_Menu::selected_position(int p, sf::RenderWindow &window)
 	{
 	case 0:
 		startGame(window, false);
-		//start_new_game(window);
 		break;
 	case 1:
 		startGame(window, true);
 		break;
 	case 2:
-		aboutGame(window);
-		break;
-	case 3:
 		window.close();
 		return 1;
 		break;
@@ -88,7 +83,7 @@ int Main_Menu::main_menu(sf::RenderWindow &window)
 				}
 				if (event.key.code == sf::Keyboard::Down)
 				{
-					if (p_b->getMenuPosition() < 3)
+					if (p_b->getMenuPosition() < 2)
 					{
 						p_b->buttonUnselected();
 						p_b = button[p_b->getMenuPosition() + 1];
@@ -108,7 +103,7 @@ int Main_Menu::main_menu(sf::RenderWindow &window)
 
 			}
 		}
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 3; i++)
 			button[i]->draw(window);
 
 		window.draw(text);
@@ -168,7 +163,7 @@ Pause::~Pause() {
 
 
 
-int Pause::pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi)
+int Pause::pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi, sf::Time time)
 {
 	p_b = button[0];
 	p_b->buttonSelected();
@@ -187,7 +182,7 @@ int Pause::pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi)
 			{
 				if (event.key.code == sf::Keyboard::Return)
 				{
-					if (selected_position(p_b->getMenuPosition(), window, tamagotchi) == 1)
+					if (selected_position(p_b->getMenuPosition(), window, tamagotchi, time) == 1)
 					{
 						return 1;
 					}
@@ -227,7 +222,7 @@ int Pause::pause_menu(sf::RenderWindow &window, Tamagotchi *tamagotchi)
 	return 0;
 }
 
-int Pause::selected_position(int p, sf::RenderWindow &window, Tamagotchi *tamagotchi)
+int Pause::selected_position(int p, sf::RenderWindow &window, Tamagotchi *tamagotchi, sf::Time time)
 {
 	switch (p)
 	{
@@ -235,7 +230,7 @@ int Pause::selected_position(int p, sf::RenderWindow &window, Tamagotchi *tamago
 		return 1;
 		break;
 	case 1:
-		save_game(tamagotchi);
+		save_game(tamagotchi, time);
 		return 0;
 		break;
 	case 2:

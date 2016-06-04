@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Files.h"
 
-void save_game(Tamagotchi *tamagotchi)
+void save_game(Tamagotchi *tamagotchi, sf::Time time)
 {
 	ofstream fout(SAVE);
 	if (!fout.is_open())
@@ -11,12 +11,13 @@ void save_game(Tamagotchi *tamagotchi)
 	}
 	//wykorzystanie przeciazonego operatora <<
 	fout << tamagotchi;
+	fout << time.asSeconds();
 	fout.close();
 }
 
-AbstractObject getTamagotchiFromFile() {
+GameState getTamagotchiFromFile() {
 	ifstream fin(SAVE);
-	AbstractObject object = AbstractObject();
+	GameState object = GameState();
 	if (!fin.is_open()) {
 		fin.clear(); // zeruje stan strumienia
 		return object; //jezeli plik nie istnial, funkcja zwraca 'pustego' gracza

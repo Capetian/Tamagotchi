@@ -4,7 +4,6 @@
 //
 
 #pragma once
-
 #include "targetver.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -12,7 +11,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <tchar.h>
-#include "AbstractObject.h"
+#include "GameState.h"
 #include "MyException.h"
 #include "GameObject.h"
 #include "Fruit.h"
