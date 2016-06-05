@@ -25,22 +25,6 @@ public:
 
 void startGame(sf::RenderWindow &window, bool loaded);
 
-/*
-class Pause : public Main_Menu
-{
-public:
-	Pause();
-	int pause_menu(sf::RenderWindow &window, Player &player);
-	int selected_position(int p, sf::RenderWindow &window, Player &player);
-};
-
-//funkcja obslugujaca wybranie przycisku nowej gry
-//void start_new_game(sf::RenderWindow &window);
-
-//funkcja obslugujaca wybranie przycisku zaladowanej gry
-//void start_loaded_game(sf::RenderWindow &window);
-*/
-
 class Pause : public Main_Menu
 {
 public:

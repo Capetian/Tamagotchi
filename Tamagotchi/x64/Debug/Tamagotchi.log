@@ -1,2 +1,6 @@
-﻿  Menu.cpp
+﻿  Game.cpp
+c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(27): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(230): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(243): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\alicja\documents\visual studio 2015\projects\tamagotchi\tamagotchi\game.cpp(255): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Tamagotchi.vcxproj -> C:\Users\Alicja\documents\visual studio 2015\Projects\Tamagotchi\x64\Debug\Tamagotchi.exe

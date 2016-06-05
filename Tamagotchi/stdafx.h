@@ -6,6 +6,7 @@
 #pragma once
 #include "targetver.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/System.hpp>
 #include "Interface.h"
 #include <stdio.h>

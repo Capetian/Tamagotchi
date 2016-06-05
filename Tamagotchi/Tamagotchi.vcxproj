@@ -152,7 +152,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutGame.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Dragon.h" />
@@ -171,7 +170,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AboutGame.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Dragon.cpp" />

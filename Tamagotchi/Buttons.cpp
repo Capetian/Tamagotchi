@@ -2,10 +2,7 @@
 #include "Buttons.h"
 
 
-//konstruktor
-
-Button::Button(float _x, float _y, int p, Font &font, string name) 
-{
+Button::Button(float _x, float _y, int p, Font &font, string name){
 	menuPosition = p;
 	text.setFont(font.style);
 	text.setCharacterSize(30);
@@ -15,10 +12,7 @@ Button::Button(float _x, float _y, int p, Font &font, string name)
 }
 
 
-//pozostale metody
-
-void Button::draw(sf::RenderWindow &window)
-{
+void Button::draw(sf::RenderWindow &window){
 
 	window.draw(text);
 }
@@ -29,13 +23,11 @@ int Button::getMenuPosition()
 }
 
 
-void Button::buttonSelected()
-{
+void Button::buttonSelected(){
 	text.setColor(sf::Color::Green);
 }
 
-void Button::buttonUnselected()
-{
+void Button::buttonUnselected(){
 	text.setColor(sf::Color::White);
 }
 

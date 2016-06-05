@@ -7,12 +7,12 @@ Main_Menu::Main_Menu()
 
 	text.setFont(font.style);
 	text.setString("Tamagotchi");
-	text.setPosition(160, 30);
-	text.setCharacterSize(30);
+	text.setPosition(220, 30);
+	text.setCharacterSize(45);
 	text.setColor(sf::Color::Blue);
-	button.push_back(new Button(160, 100, 0, font, "New game"));
-	button.push_back(new Button(160, 170, 1, font, "Load game"));
-	button.push_back(new Button(160, 380, 4, font, "Close"));
+	button.push_back(new Button(320, 120, 0, font, "New game"));
+	button.push_back(new Button(300, 220, 1, font, "Load game"));
+	button.push_back(new Button(350, 320, 2, font, "Close"));
 
 }
 
@@ -127,9 +127,9 @@ void startGame(sf::RenderWindow &window, bool loaded) {
 		Font font;
 		text.setFont(font.style);
 		text.setString("Game Over");
-		text.setCharacterSize(30);
+		text.setCharacterSize(45);
 		text.setColor(sf::Color::Green);
-		text.setPosition(150, 150);
+		text.setPosition(220, 150);
 
 		while (window.isOpen())
 		{

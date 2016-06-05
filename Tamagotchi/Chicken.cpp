@@ -22,23 +22,23 @@ Chicken::Chicken(Egg egg) {
 
 
 void Chicken::loseHappiness() {
-	happiness -= 10;
+	happiness -= 5;
 }
 
 
 void Chicken::getHungry() {
-	hunger += 20;
+	hunger += 10;
 }
 void Chicken::play() {
-	if (happiness < 100)
 		happiness += 5;
+		if (happiness > 100) happiness = 100;
 	addExperience();
 
 }
 
 void Chicken::feed() {
-	if (hunger > 5)
 		hunger -= 3;
+		if (hunger <0) hunger = 0;
 	addExperience();
 
 }

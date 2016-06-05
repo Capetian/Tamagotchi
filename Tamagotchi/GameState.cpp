@@ -3,10 +3,10 @@
 
 GameState::GameState() {
 	type = 0;
-	happiness = 0;
-	hunger = 0;
+	happiness = 20;
+	hunger = 50;
 	experience = 0;
-
+	time = 0;
 
 }
 istream& operator>>(istream &in, GameState &object) {

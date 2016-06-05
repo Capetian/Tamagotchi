@@ -161,19 +161,19 @@ int Game::play(sf::RenderWindow &window) {
 			try {
 				Egg &egg = dynamic_cast<Egg &>(*tamagotchi);
 				if (egg.returnx() > 0)
-					egg.move(-14);
+					egg.move(-12);
 			}
 			catch (bad_cast&) {
 				try {
 					Chicken &chicken = dynamic_cast<Chicken &>(*tamagotchi);
 					if (chicken.returnx() > 0)
-						chicken.move(-14);
+						chicken.move(-16);
 				}
 				catch (bad_cast&) {
 					try {
 						Dragon &dragon = dynamic_cast<Dragon &>(*tamagotchi);
 						if (dragon.returnx() > 0)
-							dragon.move(-14);
+							dragon.move(-20);
 					}
 					catch (bad_cast&) {
 						cout << "Bad cast" << endl;
@@ -187,19 +187,19 @@ int Game::play(sf::RenderWindow &window) {
 			try {
 				Egg &egg = dynamic_cast<Egg &>(*tamagotchi);
 				if (egg.returnx() < 500)
-					egg.move(14);
+					egg.move(12);
 			}
 			catch (bad_cast&) {
 				try {
 					Chicken &chicken = dynamic_cast<Chicken &>(*tamagotchi);
 					if (chicken.returnx() < 500)
-						chicken.move(14);
+						chicken.move(16);
 				}
 				catch (bad_cast&) {
 					try {
 						Dragon &dragon = dynamic_cast<Dragon &>(*tamagotchi);
 						if (dragon.returnx() < 500)
-							dragon.move(14);
+							dragon.move(20);
 					}
 					catch (bad_cast&) {
 						cout << "Bad cast" << endl;
@@ -212,7 +212,7 @@ int Game::play(sf::RenderWindow &window) {
 
 		time = clockTransformation.getElapsedTime();
 
-		if (time + addedTime > timeBetweenTransformations && !isPlaying && !isEating && tamaVector[tamagotchiCount - 1]->getExperience() > 20) {
+		if (time + addedTime > timeBetweenTransformations && !isPlaying && !isEating && tamaVector[tamagotchiCount - 1]->getExperience() > 300) {
 			Tamagotchi *tamagotchi;
 			addedTime = sf::seconds(0);
 			if (typeid(Egg) == typeid(*tamaVector[tamagotchiCount - 1])) {
@@ -261,8 +261,8 @@ int Game::play(sf::RenderWindow &window) {
 				ballsCounter = 0;
 			}
 		}
-
-		if ((tamaVector[tamagotchiCount - 1]->getHunger() < 10) && (tamaVector[tamagotchiCount - 1]->getHappiness() <= 0))
+		//jesli zaniedbamy tamagotchi to.... [*]
+		if ((tamaVector[tamagotchiCount - 1]->getHunger() >= 100)||  (tamaVector[tamagotchiCount - 1]->getHappiness() <= 10))
 			return 0;
 
 		for (int i = 0; i < fruits.size(); i++) {

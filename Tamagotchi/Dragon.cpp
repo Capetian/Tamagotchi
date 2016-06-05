@@ -30,16 +30,16 @@ void Dragon::getHungry() {
 	hunger += 30;
 }
 void Dragon::play() {
-	if (happiness < 100)
 		happiness += 3;
+		if (happiness > 100) happiness = 100;
 	addExperience();
 
 
 }
 
 void Dragon::feed() {
-	if (hunger > 2)
 		hunger -= 2;
+		if (hunger <0) hunger = 0;
 	addExperience();
 
 }

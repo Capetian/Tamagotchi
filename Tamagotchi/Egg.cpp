@@ -10,25 +10,25 @@ Egg::Egg(GameState object) {
 	hunger = object.hunger;
 	happiness = object.happiness;
 	experience = object.experience;
+	setImage();
 }
 
 void Egg::loseHappiness() {
-	happiness -= 5;
+	happiness -= 2;
 }
 
 void Egg::getHungry() {
-	hunger += 10;
+	hunger += 4;
 }
 void Egg::play() {
-	if (happiness < 100)
 		happiness += 10;
+		if (happiness > 100) happiness = 100;
 	addExperience();
 }
 
 void Egg::feed() {
-	if (hunger > 3) {
 		hunger -= 5;
-	}
+		if (hunger <0) hunger = 0;
 	addExperience();
 }
 
