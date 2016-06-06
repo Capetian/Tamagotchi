@@ -7,7 +7,7 @@
 
 using namespace std;
 
-//klasy do obslugi wyjatkow
+//klasa do obslugi wyjatkow
 class MyException
 {
 protected:

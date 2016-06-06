@@ -4,10 +4,8 @@
 Ball::Ball(float _x, float _y) : GameObject(_x, _y) {
 
 	try {
-	
-	texture.loadFromFile("basketball.png");
-	
 
+		texture.loadFromFile("basketball.png");
 		icon.setTexture(texture);
 		icon.setPosition(_x, _y);
 	}

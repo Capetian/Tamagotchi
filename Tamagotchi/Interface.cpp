@@ -3,8 +3,7 @@
 
 
 
-string int2str(int i)
-{
+string int2str(int i){
 	stringstream ss;
 	string temp;
 	ss << i;
@@ -12,10 +11,8 @@ string int2str(int i)
 	return temp;
 }
 
-Font::Font()
-{
-	if (!style.loadFromFile("tamagotchi.ttf"))
-	{
+Font::Font(){
+	if (!style.loadFromFile("tamagotchi.ttf")){
 		cout << "error" << endl;
 	}
 }

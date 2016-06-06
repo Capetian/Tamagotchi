@@ -2,8 +2,7 @@
 #include "Menu.h"
 
 
-Main_Menu::Main_Menu()
-{
+Main_Menu::Main_Menu(){
 
 	text.setFont(font.style);
 	text.setString("Tamagotchi");
@@ -16,8 +15,7 @@ Main_Menu::Main_Menu()
 
 }
 
-Main_Menu::Main_Menu(string name)
-{
+Main_Menu::Main_Menu(string name){
 	text.setFont(font.style);
 	text.setString(name);
 	text.setPosition(50, 250);
@@ -26,8 +24,7 @@ Main_Menu::Main_Menu(string name)
 	text.setColor(sf::Color::Green);
 }
 
-Main_Menu::~Main_Menu()
-{
+Main_Menu::~Main_Menu(){
 
 	for (int i = 0; i < button.size(); i++) {
 		button[i] = NULL;
@@ -37,8 +34,7 @@ Main_Menu::~Main_Menu()
 	delete p_b;
 }
 
-int Main_Menu::selected_position(int p, sf::RenderWindow &window)
-{
+int Main_Menu::selected_position(int p, sf::RenderWindow &window){
 	switch (p)
 	{
 	case 0:
@@ -55,8 +51,7 @@ int Main_Menu::selected_position(int p, sf::RenderWindow &window)
 	return 0;
 }
 
-int Main_Menu::main_menu(sf::RenderWindow &window)
-{
+int Main_Menu::main_menu(sf::RenderWindow &window){
 	p_b = button[0];
 
 
@@ -131,11 +126,9 @@ void startGame(sf::RenderWindow &window, bool loaded) {
 		text.setColor(sf::Color::Green);
 		text.setPosition(220, 150);
 
-		while (window.isOpen())
-		{
+		while (window.isOpen()){
 			time = clock.getElapsedTime();
-			if (time > t1)
-			{
+			if (time > t1){
 				return;
 			}
 			window.draw(text);

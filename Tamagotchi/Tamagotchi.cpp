@@ -5,22 +5,20 @@
 	 happiness = 20;
 	 hunger = 50;
 	 experience = 0;
-	 clock.restart();
+
 }
  Tamagotchi::Tamagotchi(int happiness, int hunger, int experience)
 	 :happiness(happiness), hunger(hunger), experience(experience){}
 
 
- void Tamagotchi::getLivingTime() {
-	 sf::Time time = clock.getElapsedTime();
-	 birth = time.asSeconds();
- }
-
 
  ostream& operator<<(ostream &out, Tamagotchi *tamagotchi){
-	 tamagotchi->getLivingTime();
-	 out << "1" << endl;
-	/* out << tamagotchi->birth << endl;*/
+	 if (typeid(Egg) == typeid(*tamagotchi)) 
+		 out << "0" << endl;
+	 else if (typeid(Chicken) == typeid(*tamagotchi))
+		 out << "1" << endl;
+	 else if (typeid(Dragon) == typeid(*tamagotchi))
+		 out << "2" << endl;
 	 out << tamagotchi->happiness << endl;
 	 out << tamagotchi->experience << endl;
 	 out << tamagotchi->hunger << endl;

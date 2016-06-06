@@ -6,8 +6,7 @@
 #include "Buttons.h"
 #include "Game.h"
 
-class Main_Menu
-{
+class Main_Menu{
 protected:
 	vector<Button*> button;
 	Button *p_b;

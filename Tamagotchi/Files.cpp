@@ -13,6 +13,7 @@ void save_game(Tamagotchi *tamagotchi, sf::Time time)
 	fout << tamagotchi;
 	fout << time.asSeconds();
 	fout.close();
+	cout << "Zapisano gre!" << endl;
 }
 
 GameState getTamagotchiFromFile() {
@@ -20,7 +21,7 @@ GameState getTamagotchiFromFile() {
 	GameState object = GameState();
 	if (!fin.is_open()) {
 		fin.clear(); // zeruje stan strumienia
-		return object; //jezeli plik nie istnial, funkcja zwraca 'pustego' gracza
+		return object; //jezeli plik nie istnial, funkcja zwraca 'pusty' stan gry
 	}
 	else {
 	
@@ -34,12 +35,13 @@ GameState getTamagotchiFromFile() {
 			e.show_message();
 			fin.close();
 			return object;
-			//wczytanie z pliku nie powiodlo sie, zwracany jest 'pusty' gracz
+			//wczytanie z pliku nie powiodlo sie, zwracany jest 'pusty' obiekt stanu gry
 		}
 
 		fin.close();
+		cout << "Poprawnie wczytano stan gry" << endl;
 		return object;
-		//wszystko wczytalo sie poprawnie, zwracany jest gracz z wczytanymi wartosciami
+		//wszystko wczytalo sie poprawnie, zwracany jest stan gry z wczytanymi wartosciami
 	}
 }
 

@@ -15,7 +15,6 @@ class Font {
 public:
 	//publiczne pole obiektu klasy z biblioteki sfml aby umozliwic bezposrednie korzystanie z metod tej klasy
 	sf::Font style;
-
 	//konstruktor bezargumentowy
 	Font();
 };

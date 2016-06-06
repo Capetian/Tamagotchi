@@ -65,8 +65,6 @@ void Egg::addExperience() {
 	experience += 10;
 }
 
-
-
 void Egg::move(float _x) {
 	icon.move(_x, 0);
 	sf::Vector2f position = icon.getPosition();

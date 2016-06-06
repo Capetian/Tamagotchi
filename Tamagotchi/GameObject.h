@@ -10,7 +10,6 @@ protected:
 
 public:
 	//konstruktor bezargumentowy
-
 	GameObject() :x(100), y(300) {}
 
 	//konstruktor przyjmujacy jako argumenty poczatkowe wspolrzedne obiektu

@@ -18,9 +18,6 @@ Game::~Game() {
 Game::Game(bool loaded) {
 	tamagotchiCount = 0;
 	font_numb.style.loadFromFile("number.ttf");
-	t1 = sf::seconds(20);
-	t2 = sf::seconds(3);
-	t3 = sf::seconds(10);
 
 	timeBetweenTransformations = sf::seconds(60);
 	timeToGrowUp = sf::seconds(10);
@@ -72,8 +69,6 @@ Game::Game(bool loaded) {
 	text_happiness.setCharacterSize(36);
 	text_happiness.setColor(sf::Color::Green);
 	text_happiness.setPosition(690, 240);
-
-
 
 	sf::Vector2f size;
 	size.x = 580;
@@ -329,7 +324,6 @@ void Game::show_info(sf::RenderWindow &window)
 
 	window.draw(rectangle_up);
 	window.draw(bottom_line);
-
 
 	tamaVector[tamagotchiCount - 1]->draw(window);
 }

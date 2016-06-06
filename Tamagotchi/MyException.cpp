@@ -1,18 +1,15 @@
 #include "stdafx.h"
 #include "MyException.h"
 
-MyException::MyException()
-{
+MyException::MyException(){
 	message = "Nieznany blad";
 }
 
-void MyException::show_message()
-{
+void MyException::show_message(){
 	cout << message << endl;
 }
 
-UnloadedGame::UnloadedGame()
-{
+UnloadedGame::UnloadedGame(){
 	message = "Blad wczytania stanu gry z pliku";
 }
 

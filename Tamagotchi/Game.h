@@ -14,9 +14,6 @@ public:
 	sf::Time timeToGrowUp;
 	sf::Time timeBetweenFood;
 	sf::Time timeBetweenBalls;
-	sf::Time t1;
-	sf::Time t2;
-	sf::Time t3;
 	sf::Clock clockTransformation;
 	sf::Clock clockObjectGenerator;
 	sf::Clock clockGrowingUp;
